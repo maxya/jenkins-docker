@@ -1,4 +1,7 @@
 pipeline {
+    environment {
+        registry = "mysuperimage"
+    }
     agent {
         docker { image 'node:7-alpine' }
     }
@@ -10,6 +13,10 @@ pipeline {
         }
         stage('Another Image') {
             steps{
+                script {
+                    docker.build registry + ":$BUILD_NUMBER"
+
+                }
         step( [
                 $class: 'DockerBuilderPublisher',
                 cleanImages: false,
