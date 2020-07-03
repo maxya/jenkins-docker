@@ -16,7 +16,7 @@ pipeline {
 
             steps{
             dir('dockerstuff') {
-                git https://github.com/maxya/jenkins-docker
+                git git@github.com:maxya/jenkins-docker.git
                 script {
                     docker.build registry + ":$BUILD_NUMBER"
 
