@@ -2,11 +2,12 @@ pipeline {
     environment {
         registry = "mysuperimage"
     }
+    agent any
+    stages {
+        stage('Test') {
     agent {
         docker { image 'node:7-alpine' }
     }
-    stages {
-        stage('Test') {
             steps {
                 sh 'node --version'
             }
@@ -17,16 +18,6 @@ pipeline {
                     docker.build registry + ":$BUILD_NUMBER"
 
                 }
-        step( [
-                $class: 'DockerBuilderPublisher',
-                cleanImages: false,
-                cleanupWithJenkinsJobDelete: false,
-                cloud: '', dockerFileDirectory: 'dockerstuff',
-                fromRegistry: [],
-                pushCredentialsId: '',
-                pushOnSuccess: false,
-                tagsString: 'mydocker'
-                ])
 
             }
         }
