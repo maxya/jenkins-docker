@@ -9,6 +9,7 @@ pipeline {
             }
         }
         stage('Another Image') {
+            steps{
         step( [
                 $class: 'DockerBuilderPublisher',
                 cleanImages: false,
@@ -21,5 +22,6 @@ pipeline {
                 ])
 
             }
+        }
     }
 }
