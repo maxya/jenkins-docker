@@ -16,7 +16,7 @@ pipeline {
 
             steps{
             dir('dockerstuff') {
-                git 'https://github.com/maxya/jenkins-docker'
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'newapp']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/maxya/jenkins-docker']]])
                 script {
                     docker.build registry + ":$BUILD_NUMBER"
 
