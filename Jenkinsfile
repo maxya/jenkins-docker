@@ -13,9 +13,9 @@ pipeline {
             }
         }
         stage('Another Image') {
-            dir('dockerstuff') {
 
             steps{
+            dir('dockerstuff') {
                 git https://github.com/maxya/jenkins-docker
                 script {
                     docker.build registry + ":$BUILD_NUMBER"
